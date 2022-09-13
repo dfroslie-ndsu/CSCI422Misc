@@ -1,19 +1,19 @@
 {
 	"name": "EIA_API",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"api_key": {
+				"type": "string",
+				"defaultValue": "L8TSdCwHoRefg4rBclbKqfjGEDxqKu1gZn8OvQGa"
+			}
+		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
 			"url": "https://api.eia.gov/v2/electricity/state-electricity-profiles/capability/data/",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous",
-			"authHeaders": {
-				"api_key": {
-					"type": "SecureString",
-					"value": "**********"
-				}
-			}
+			"authenticationType": "Anonymous"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }

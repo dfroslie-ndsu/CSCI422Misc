@@ -1,6 +1,6 @@
 #%%
-# REST API sample found on page 77 of "Data Pipelines Pocket Reference"
-# Note that the exact api, iss-pass, is disabled.
+# This assumes that DataPipelinesSample_REST.py has been executed
+# and a local file, ActiveAstronauts.csv exists.
 
 # You may need to install the following packages:
 #   pip install requests
@@ -9,7 +9,7 @@ import requests
 import json
 import pandas as pd
 
-print("Hello world")
+print("Hello world")  
 
 #%%
 # Get current space station position
@@ -34,8 +34,4 @@ if json_data['message']=="success":
 
 print(astros_df)
 
-#%%
-# Save astronaut list
-astros_df.to_csv(".\ActiveAstronauts.csv", index=False)
 
-# %%

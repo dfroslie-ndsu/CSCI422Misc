@@ -1,5 +1,12 @@
 # Custom
+
+# Ignore config files as they store keys.
 *.config
+
+# Ignore data files that I don't want pushed to github
+IngestSamples/datasets
+
+# Standard python
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

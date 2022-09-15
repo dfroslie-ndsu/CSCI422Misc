@@ -1,14 +1,16 @@
 #%%
+# Sample to write CSV content to Azure Data Lake Storage.
+
 # This assumes that DataPipelinesSample_REST.py has been executed
 # and a local file, ActiveAstronauts.csv exists.
 
 # You may need to install the following packages:
-#   pip install 
+#   pip install pandas
 #   pip install azure-storage-file-datalake
 import pandas as pd
 from azure.storage.filedatalake import DataLakeServiceClient
 
-print("Hello world")  
+print("Imports complete")  
 
 
 # %%

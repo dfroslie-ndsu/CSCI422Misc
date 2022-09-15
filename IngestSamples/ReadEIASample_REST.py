@@ -40,3 +40,4 @@ price_df = pd.DataFrame(response_json['data'])
 print(total_data_points)
 print(price_df)
 
+    

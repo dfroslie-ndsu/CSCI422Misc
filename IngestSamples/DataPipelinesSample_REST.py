@@ -9,7 +9,7 @@ import requests
 import json
 import pandas as pd
 
-print("Hello world")
+print("Imports complete")
 
 #%%
 # Get current space station position
@@ -25,13 +25,18 @@ api_response = requests.get(
     "http://api.open-notify.org/astros.json" 
 )
 
-# Parse the result and convert the people list to a Pandas dataframe.
+# Parse the result to JSON.
 json_data = json.loads(api_response.content)
 
+print(json_data)
+
+#%%
+# Convert the people list to a Pandas dataframe.
 if json_data['message']=="success":
     astro_count = json_data['number']
     astros_df = pd.DataFrame(json_data['people'])
 
+print("Total astronauts:  " + str(astro_count))
 print(astros_df)
 
 #%%

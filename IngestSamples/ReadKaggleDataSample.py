@@ -42,3 +42,10 @@ print(iris_df)
 api.datasets_list()
 
 
+
+# %%
+dataset = 'iamsouravbanerjee/world-population-dataset'
+out_path = 'datasets/WorldPopulation'
+
+api.dataset_download_file(dataset, 'world_population.csv', out_path)
+# %%

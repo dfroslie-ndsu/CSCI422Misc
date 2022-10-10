@@ -49,7 +49,7 @@ directory_client=file_system_client.create_directory("Astronauts2")
 
 #%%
 # Upload the data file.
-directory_client = file_system_client.get_directory_client("Astronauts")
+directory_client = file_system_client.get_directory_client("Astronauts2")
         
 file_client = directory_client.create_file("ActiveAstronauts.csv")
 
@@ -59,3 +59,5 @@ file_contents = astronauts_file.read()
 
 file_client.upload_data(file_contents, overwrite=True)
 
+
+# %%

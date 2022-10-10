@@ -41,3 +41,4 @@ print(total_data_points)
 print(price_df)
 
     
+# %%

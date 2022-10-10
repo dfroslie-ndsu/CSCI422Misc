@@ -5,12 +5,20 @@
 			"api_key": {
 				"type": "string",
 				"defaultValue": "L8TSdCwHoRefg4rBclbKqfjGEDxqKu1gZn8OvQGa"
+			},
+			"data[]": {
+				"type": "string",
+				"defaultValue": "price"
+			},
+			"start": {
+				"type": "string",
+				"defaultValue": "2019-01"
 			}
 		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://api.eia.gov/v2/electricity/state-electricity-profiles/capability/data/",
+			"url": "https://api.eia.gov/v2/electricity/retail-sales/data/",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}

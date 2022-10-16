@@ -1,41 +1,51 @@
 StudentID,Major,HomeState
-1,Computer Science,Minnesota
-2,Computer Engineering,Montana
-3,Computer Science,North Dakota
-4,Other,Minnesota
+1,Computer Science,North Dakota
+2,Computer Science,Minnesota
+3,Computer Science,Minnesota
+4,Computer Science,North Dakota
 5,Computer Science,Montana
-6,Computer Science,North Dakota
-7,Computer Science,North Dakota
-8,Computer Science,North Dakota
-9,Computer Science,Minnesota
-10,Computer Engineering,North Dakota
-11,Computer Science,North Dakota
-12,Computer Science,North Dakota
-13,Computer Science,North Dakota
-14,Computer Science,North Dakota
-15,Computer Science,North Dakota
-16,Computer Science,North Dakota
-17,Computer Science,Montana
-18,Other,Minnesota
-19,Computer Science,North Dakota
-20,Computer Science,Montana
-21,Computer Science,Minnesota
+6,Computer Science,Minnesota
+7,Computer Science,Minnesota
+8,Computer Engineering,Montana
+9,Other,North Dakota
+10,Computer Science,North Dakota
+11,Computer Science,Montana
+12,Other,Minnesota
+13,Computer Engineering,North Dakota
+14,Other,Montana
+15,Computer Science,Minnesota
+16,Computer Science,Minnesota
+17,Computer Science,North Dakota
+18,Computer Science,Other
+19,Computer Science,Minnesota
+20,Other,North Dakota
+21,Computer Science,North Dakota
 22,Computer Science,North Dakota
-23,Computer Science,Minnesota
-24,Computer Science,North Dakota
-25,Computer Science,Minnesota
-26,Computer Science,North Dakota
-27,Computer Science,North Dakota
-28,Computer Science,North Dakota
-29,Other,Minnesota
-30,Computer Science,Minnesota
-31,Computer Engineering,Minnesota
-32,Computer Science,North Dakota
+23,Computer Science,North Dakota
+24,Computer Engineering,Other
+25,Computer Science,North Dakota
+26,Computer Engineering,Minnesota
+27,Computer Science,Minnesota
+28,Other,Minnesota
+29,Computer Science,North Dakota
+30,Computer Science,North Dakota
+31,Computer Science,North Dakota
+32,Computer Engineering,Minnesota
 33,Computer Science,North Dakota
-34,Computer Engineering,Minnesota
-35,Computer Science,North Dakota
-36,Computer Science,Minnesota
-37,Computer Science,North Dakota
-38,Computer Science,Minnesota
-39,Computer Science,North Dakota
-40,Other,Montana
+34,Computer Science,Minnesota
+35,Computer Science,Minnesota
+36,Computer Science,North Dakota
+37,Computer Science,Other
+38,Computer Engineering,Minnesota
+39,Computer Science,Other
+40,Computer Science,Minnesota
+41,Computer Science,North Dakota
+42,Computer Science,North Dakota
+43,Computer Science,North Dakota
+44,Computer Science,North Dakota
+45,Computer Science,Minnesota
+46,Computer Science,Minnesota
+47,Computer Science,North Dakota
+48,Computer Engineering,Minnesota
+49,Computer Science,Minnesota
+50,Computer Science,Minnesota

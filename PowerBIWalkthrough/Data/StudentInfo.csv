@@ -1,0 +1,51 @@
+StudentID,Major,HomeState,Name,ACT Score
+1,Computer Science,North Dakota,Mike Trout,34
+2,Computer Science,Minnesota,Ronald Acuna,30
+3,Computer Science,Minnesota,Christian Yelich,27
+4,Computer Science,North Dakota,Cody Bellinger,32
+5,Computer Science,Montana,Trea Turner,25
+6,Computer Science,Minnesota,Mookie Betts,28
+7,Computer Science,Minnesota,Trevor Story,34
+8,Computer Engineering,Montana,Juan Soto,25
+9,Other,North Dakota,Francisco Lindor,23
+10,Computer Science,North Dakota,Jose Ramirez,31
+11,Computer Science,Montana,Alex Bregman,33
+12,Other,Minnesota,Freddie Freeman,24
+13,Computer Engineering,North Dakota,Nolan Arenado,28
+14,Other,Montana,Jose Altuve,29
+15,Computer Science,Minnesota,J.D. Martinez,22
+16,Computer Science,Minnesota,Fernando Tatis,28
+17,Computer Science,North Dakota,Jonathan Villar,24
+18,Computer Science,Other,Starling Marte,36
+19,Computer Science,Minnesota,Charlie Blackmon,36
+20,Other,North Dakota,Xander Bogaerts,31
+21,Computer Science,North Dakota,Bryce Harper,28
+22,Computer Science,North Dakota,Manny Machado,24
+23,Computer Science,North Dakota,George Springer,23
+24,Computer Engineering,Other,Anthony Rendon,30
+25,Computer Science,North Dakota,Javier Baez,27
+26,Computer Engineering,Minnesota,Yordan Alvarez,27
+27,Computer Science,Minnesota,Austin Meadows,29
+28,Other,Minnesota,Gleyber Torres,32
+29,Computer Science,North Dakota,Yoan Moncada,32
+30,Computer Science,North Dakota,Pete Alonso,24
+31,Computer Science,North Dakota,Ketel Marte,30
+32,Computer Engineering,Minnesota,J.T. Realmuto,30
+33,Computer Science,North Dakota,Keston Hiura,36
+34,Computer Science,Minnesota,Kris Bryant,33
+35,Computer Science,Minnesota,Paul Goldschmidt,33
+36,Computer Science,North Dakota,Adalberto Mondesi,23
+37,Computer Science,Other,Gary Sanchez,22
+38,Computer Engineering,Minnesota,Tommy Pham,31
+39,Computer Science,Other,Rafael Devers,34
+40,Computer Science,Minnesota,Anthony Rizzo,30
+41,Computer Science,North Dakota,Ozzie Albies,24
+42,Computer Science,North Dakota,Eugenio Suarez,32
+43,Computer Science,North Dakota,Jorge Soler,32
+44,Computer Science,North Dakota,DJ LeMahieu,27
+45,Computer Science,Minnesota,Aaron Judge,26
+46,Computer Science,Minnesota,Tim Anderson,27
+47,Computer Science,North Dakota,Carlos Correa,30
+48,Computer Engineering,Minnesota,Marcus Semien,34
+49,Computer Science,Minnesota,Whit Merrifield,25
+50,Computer Science,Minnesota,Josh Donaldson,30

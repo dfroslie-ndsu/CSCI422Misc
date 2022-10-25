@@ -1,0 +1,16 @@
+Item,Type,TotalPoints,Topic
+Quiz1,Quiz,25,Module 1
+Quiz2,Quiz,25,Module 1
+Test1,Test,100,Module 1
+Assignment1,Assignment,100,Module 1
+SpecialEvent1,PassFail,10,Other
+Quiz3,Quiz,25,Module 2
+Quiz4,Quiz,25,Module 2
+Test2,Test,100,Module 2
+Assignment2,Assignment,100,Module 2
+Quiz5,Quiz,25,Module 3
+Quiz6,Quiz,25,Module 3
+Test3,Test,100,Module 3
+Assignment3,Assignment,100,Module 3
+SpecialEvent2,PassFail,20,Other
+Final,Final,300,All

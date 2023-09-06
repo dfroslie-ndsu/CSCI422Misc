@@ -42,14 +42,14 @@ print(service_client)
 
 #%%
 # Create a container and a directory.
-file_system_client = service_client.create_file_system(file_system="assign-2-sample2")    
+file_system_client = service_client.create_file_system(file_system="assign-2-sample4")    
 
-directory_client=file_system_client.create_directory("Astronauts2")
+directory_client=file_system_client.create_directory("Astronauts")
 
 
 #%%
 # Upload the data file.
-directory_client = file_system_client.get_directory_client("Astronauts2")
+directory_client = file_system_client.get_directory_client("Astronauts")
         
 file_client = directory_client.create_file("ActiveAstronauts.csv")
 

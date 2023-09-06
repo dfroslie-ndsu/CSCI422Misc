@@ -11,6 +11,7 @@ import pandas as pd
 
 print("Imports complete")
 
+
 #%%
 # Get current space station position
 api_response = requests.get(

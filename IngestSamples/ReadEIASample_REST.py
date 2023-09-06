@@ -42,3 +42,5 @@ print(price_df)
 
     
 # %%
+price_df.head(40)
+# %%

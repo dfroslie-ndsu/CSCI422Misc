@@ -1,11 +1,13 @@
-name,craft
-Oleg Artemyev,ISS
-Denis Matveev,ISS
-Sergey Korsakov,ISS
-Kjell Lindgren,ISS
-Bob Hines,ISS
-Samantha Cristoforetti,ISS
-Jessica Watkins,ISS
-Cai Xuzhe,Tiangong
-Chen Dong,Tiangong
-Liu Yang,Tiangong
+craft,name
+ISS,Oleg Kononenko
+ISS,Nikolai Chub
+ISS,Tracy Caldwell Dyson
+ISS,Matthew Dominick
+ISS,Michael Barratt
+ISS,Jeanette Epps
+ISS,Alexander Grebenkin
+ISS,Butch Wilmore
+ISS,Sunita Williams
+Tiangong,Li Guangsu
+Tiangong,Li Cong
+Tiangong,Ye Guangfu

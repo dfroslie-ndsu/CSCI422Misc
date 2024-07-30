@@ -29,7 +29,7 @@ def initialize_storage_account(storage_account_name, storage_account_key):
 
 
 #%%
-storage_account_name = "assign1storage"
+storage_account_name = "assign1store"
 
 # Note - store file in a config file that is NOT checked in.
 # Use .gitignore to avoid accidental submission.

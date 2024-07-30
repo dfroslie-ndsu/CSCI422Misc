@@ -6,7 +6,7 @@
 #   pip install pandas
 
 # You will also need to store your credentials at the location described in
-# https://github.com/Kaggle/kaggle-api#api-credentials
+# https://github.com/Kaggle/kaggle-api/blob/main/docs/README.md#api-credentials 
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 

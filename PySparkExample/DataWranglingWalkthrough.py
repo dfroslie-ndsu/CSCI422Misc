@@ -1,8 +1,8 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC # Data Wrangling Walkthrough
-# MAGIC 
+# MAGIC
 # MAGIC This notebook provides examples of several core PySpark operations using the Spark dataframe.  This will include:
 # MAGIC - Reading data from CSV
 # MAGIC - Basic dataframe metrics
@@ -11,6 +11,8 @@
 # MAGIC - Filtering data
 # MAGIC - Aggregation operations
 # MAGIC - Saving data
+# MAGIC
+# MAGIC
 
 # COMMAND ----------
 
@@ -24,10 +26,11 @@ uri = "abfss://datawranglingsample@marchmadstore.dfs.core.windows.net/"
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## Reading data
-# MAGIC 
+# MAGIC
 # MAGIC This section will provide a couple of examples of reading data into a notebook.
+# MAGIC
 
 # COMMAND ----------
 
@@ -78,10 +81,12 @@ print(students_df.dtypes)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## Join the two data sets
-# MAGIC 
+# MAGIC
 # MAGIC You should be familiar with the various types of joins.  We will use an inner join to get the student information together with the grades.
+# MAGIC
+# MAGIC
 
 # COMMAND ----------
 
@@ -122,8 +127,9 @@ display(tests_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## Find the average grade based on HomeState using the new column.
+# MAGIC
 
 # COMMAND ----------
 
@@ -150,8 +156,9 @@ display(homestate_cs_avg_df)
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## Read the file with detail on the grade items.  "Melt" the grades dataframe to enable a join with the grade items.
+# MAGIC
 
 # COMMAND ----------
 
@@ -311,10 +318,11 @@ print(grades_df.count() * (len(grades_df.columns)-1))
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC ## Save the data in long format.
-# MAGIC 
+# MAGIC
 # MAGIC We'll save in both CSV and Parquet format.
+# MAGIC
 
 # COMMAND ----------
 
@@ -325,9 +333,13 @@ all_long_df.coalesce(1).write.option('header',True).mode('overwrite').parquet(ur
 
 # COMMAND ----------
 
+all_long_df.write.format("delta").mode('overwrite').save(uri+"output/DeltaLong")
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # Analyze long format.
-# MAGIC 
+# MAGIC
 # MAGIC Now that we're in long format, we can do a variety of analysis easily.
 
 # COMMAND ----------

@@ -16,12 +16,12 @@
 
 # COMMAND ----------
 
-# Set Spark context for the storage account and the base URI.
-spark.conf.set(
-    "fs.azure.account.key.marchmadstore.dfs.core.windows.net",
-    dbutils.secrets.get(scope="MarchMadnessScope", key="marchmadstore-key"))
+# If using Azure Databricks, set Spark context for the storage account and the base URI.
+# spark.conf.set(
+#     "fs.azure.account.key.marchmadstore.dfs.core.windows.net",
+#     dbutils.secrets.get(scope="MarchMadnessScope", key="marchmadstore-key"))
 
-uri = "abfss://datawranglingsample@marchmadstore.dfs.core.windows.net/"
+# uri = "abfss://datawranglingsample@marchmadstore.dfs.core.windows.net/"
 
 # COMMAND ----------
 
@@ -31,12 +31,28 @@ uri = "abfss://datawranglingsample@marchmadstore.dfs.core.windows.net/"
 # MAGIC
 # MAGIC This section will provide a couple of examples of reading data into a notebook.
 # MAGIC
+# MAGIC You'll need to upload the CSV data from the Data folder in your repo to your storage account or a Volumes section of the Databricks catalog.  The latter option is the only one for Databricks Free Edition.
 
 # COMMAND ----------
 
 # Read the Grades file using defaults and use the top row as header (not the default behavior)
-grades_df = spark.read.csv(uri+"data/Grades.csv", header=True)
- 
+
+# Azure Databricks - upload to storage account.
+#grades_df = spark.read.csv(uri+"data/Grades.csv", header=True)  
+
+# Databricks Free Edition - upload to a volume in the catalog.  
+# df = (
+#     spark.read.format("csv")
+#     .option("header", True)
+#     .load("/Volumes/<catalog_name>/<schema_name>/<volume_name>/<file_name>.csv")
+# )
+
+grades_df = (
+    spark.read.format("csv")
+    .option("header", True)
+    .load("/Volumes/workspace/bronze_examples/landingzone/Grades.csv")
+)
+
 display(grades_df)
 
 
@@ -63,7 +79,17 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 schema = StructType([StructField("StudentID", IntegerType(), True), \
                     StructField("Major", StringType(), True), \
                     StructField("HomeState", StringType(), True) ])
-students_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/StudentInfo.csv")
+
+# Azure Databricks
+#students_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/StudentInfo.csv")
+
+students_df = (
+    spark.read.format("csv")
+    .option("header", True)
+    .option("schema", schema)
+    .load("/Volumes/workspace/bronze_examples/landingzone/StudentInfo.csv")
+)
+
 
 display(students_df)
 
@@ -120,7 +146,15 @@ display(tests_df)
 
 # COMMAND ----------
 
-tests_df = tests_df.withColumn('TotalTestScore', tests_df.Test1+tests_df.Test2+tests_df.Test3+tests_df.Final)
+from pyspark.sql.functions import col
+
+tests_df = tests_df.withColumn(
+    "TotalTestScore",
+    col("Test1").cast("double") +
+    col("Test2").cast("double") +
+    col("Test3").cast("double") +
+    col("Final").cast("double")
+)
 
 display(tests_df)
 
@@ -169,40 +203,22 @@ schema = StructType([StructField("Item", StringType(), True), \
                     StructField("Type", StringType(), True), \
                     StructField("TotalPoints", IntegerType(), True), \
                     StructField("Topic", StringType(), True)])
-items_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/Items.csv")
+
+# Azure Databricks
+#items_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/Items.csv")
+
+# Databricks Free
+items_df = (
+    spark.read.format("csv")
+    .option("header", True)
+    .option("schema", schema)
+    .load("/Volumes/workspace/bronze_examples/landingzone/Items.csv")
+)
 
 display(items_df)
 
 print(items_df.dtypes)
 
-
-# COMMAND ----------
-
-# R and Pandas have built in "melt" (wide to long) capabilities, but PySpark doesn't seem to have this.  
-# Fortunately, the internet helps.  Here's a method along with the original source to perform the melt process.
-
-# Function from https://www.taintedbits.com/2018/03/25/reshaping-dataframe-using-pivot-and-melt-in-apache-spark-and-pandas/
-from pyspark.sql.functions import array, col, explode, lit, struct
-from pyspark.sql import DataFrame
-from typing import Iterable
-
-def melt_df(
-        df: DataFrame,
-        id_vars: Iterable[str], value_vars: Iterable[str],
-        var_name: str="variable", value_name: str="value") -> DataFrame:
-    """Convert :class:`DataFrame` from wide to long format."""
-
-    # Create array<struct<variable: str, value: ...>>
-    _vars_and_vals = array(*(
-        struct(lit(c).alias(var_name), col(c).alias(value_name))
-        for c in value_vars))
-
-    # Add to the DataFrame and explode
-    _tmp = df.withColumn("_vars_and_vals", explode(_vars_and_vals))
-
-    cols = id_vars + [
-            col("_vars_and_vals")[x].alias(x) for x in [var_name, value_name]]
-    return _tmp.select(*cols)
 
 # COMMAND ----------
 
@@ -223,13 +239,10 @@ print(grades_score_df.columns[1:len(grades_score_df.columns)])
 
 # COMMAND ----------
 
-# The target format is StudentID, Item, Score
-grades_scores_long_df = melt_df(grades_score_df,   # Data frame
-                                ['StudentID'],     # Columns to keep
-                                grades_score_df.columns[1:len(grades_score_df.columns)], # Columns to convert to long
-                                'Item',            # Name of new column that used to be the column header.
-                                'Score')             # Name of new column containing the value.
-
+grades_scores_long_df = grades_score_df.melt(ids=['StudentID'],
+                                             values=grades_score_df.columns[1:len(grades_score_df.columns)],
+                                             variableColumnName = 'Item',
+                                             valueColumnName = 'Score')
 display(grades_scores_long_df)
 
 # COMMAND ----------
@@ -243,11 +256,11 @@ display(grades_special_df)
 # COMMAND ----------
 
 # The target format is StudentID, Item, Grade
-grades_special_long_df = melt_df(grades_special_df,   # Data frame
-                                ['StudentID'],     # Columns to keep
-                                grades_special_df.columns[1:len(grades_special_df.columns)], # Columns to convert to long
-                                'Item',            # Name of new column that used to be the column header.
-                                'Grade')             # Name of new column containing the value.
+
+grades_special_long_df = grades_special_df.melt(ids=['StudentID'],
+                                             values=grades_special_df.columns[1:len(grades_special_df.columns)],
+                                             variableColumnName = 'Item',
+                                             valueColumnName = 'Grade')
 
 display(grades_special_long_df)
 
@@ -263,6 +276,7 @@ display(grades_special_scores_df)
 # COMMAND ----------
 
 # Now let's create the Score column.  We need a function to do that in PySpark.  Fortunately, it is a very simple function.
+# Note - you could also use when/other statements.
 def get_specialevent_score(grade, total_points) -> int:
     if grade=="P":
         return(total_points)
@@ -321,19 +335,19 @@ print(grades_df.count() * (len(grades_df.columns)-1))
 # MAGIC
 # MAGIC ## Save the data in long format.
 # MAGIC
-# MAGIC We'll save in both CSV and Parquet format.
+# MAGIC We'll save in CSV, Parquet, and Delta formats.
 # MAGIC
 
 # COMMAND ----------
 
-# coalesce(1) forces a single file (and a single thread)
-all_long_df.coalesce(1).write.option('header',True).mode('overwrite').csv(uri+"output/CSVLong")
-all_long_df.coalesce(1).write.option('header',True).mode('overwrite').parquet(uri+"output/ParquetLong")
+# Azure Databrics
+# all_long_df.write.option('header',True).mode('overwrite').csv(uri+"output/CSVLong")
+# all_long_df.write.option('header',True).mode('overwrite').parquet(uri+"output/ParquetLong")
+# all_long_df.write.format("delta").mode('overwrite').save(uri+"output/DeltaLong")
 
+# Databricks Free - just save to a delta lake table.
+all_long_df.write.mode("overwrite").saveAsTable("bronze_examples.grades_long")
 
-# COMMAND ----------
-
-all_long_df.write.format("delta").mode('overwrite').save(uri+"output/DeltaLong")
 
 # COMMAND ----------
 

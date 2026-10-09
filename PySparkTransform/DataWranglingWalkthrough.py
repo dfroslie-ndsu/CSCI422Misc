@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "6"
+# ///
 # MAGIC %md
 # MAGIC
 # MAGIC # Data Wrangling Walkthrough
@@ -12,11 +16,13 @@
 # MAGIC - Aggregation operations
 # MAGIC - Saving data
 # MAGIC
+# MAGIC Copy the CSV data files in the Data folder to a location in your Azure storage account or upload to a Volume in your Databricks Free workspace.
+# MAGIC
 # MAGIC
 
 # COMMAND ----------
 
-# If using Azure Databricks, set Spark context for the storage account and the base URI.
+# If using Azure Databricks and you did not set up an External Location, set Spark context for the storage account and the base URI.
 # spark.conf.set(
 #     "fs.azure.account.key.marchmadstore.dfs.core.windows.net",
 #     dbutils.secrets.get(scope="MarchMadnessScope", key="marchmadstore-key"))
@@ -47,11 +53,17 @@
 #     .load("/Volumes/<catalog_name>/<schema_name>/<volume_name>/<file_name>.csv")
 # )
 
-grades_df = (
-    spark.read.format("csv")
-    .option("header", True)
-    .load("/Volumes/workspace/bronze_examples/landingzone/Grades.csv")
-)
+# DB Free
+# grades_df = (
+#     spark.read.format("csv")
+#     .option("header", True)
+#     .load("/Volumes/workspace/bronze_examples/landingzone/Grades.csv")
+# )
+
+# Azure Databricks
+CONTAINER_URI_PATH = "abfss://csci422-fall26-assignments@fall2026store.dfs.core.windows.net/"  
+
+grades_df = spark.read.csv(CONTAINER_URI_PATH + "TransformExampleData/Grades.csv", header=True, inferSchema=True)
 
 display(grades_df)
 
@@ -83,13 +95,21 @@ schema = StructType([StructField("StudentID", IntegerType(), True), \
 # Azure Databricks
 #students_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/StudentInfo.csv")
 
+# DB Free
+# students_df = (
+#     spark.read.format("csv")
+#     .option("header", True)
+#     .schema(schema)
+#     .load("/Volumes/workspace/bronze_examples/landingzone/StudentInfo.csv")
+# )
+
+# Azure Databricks
 students_df = (
     spark.read.format("csv")
     .option("header", True)
-    .option("schema", schema)
-    .load("/Volumes/workspace/bronze_examples/landingzone/StudentInfo.csv")
+    .schema(schema)
+    .load(CONTAINER_URI_PATH + "TransformExampleData/StudentInfo.csv")
 )
-
 
 display(students_df)
 
@@ -208,13 +228,20 @@ schema = StructType([StructField("Item", StringType(), True), \
 #items_df = spark.read.options(delimiter=',', header=True).schema(schema).csv(uri+"data/Items.csv")
 
 # Databricks Free
+# items_df = (
+#     spark.read.format("csv")
+#     .option("header", True)
+#     .schema(schema)
+#     .load("/Volumes/workspace/bronze_examples/landingzone/Items.csv")
+# )
+
+# Azure Databricks
 items_df = (
     spark.read.format("csv")
     .option("header", True)
-    .option("schema", schema)
-    .load("/Volumes/workspace/bronze_examples/landingzone/Items.csv")
+    .schema(schema)
+    .load(CONTAINER_URI_PATH + "TransformExampleData/Items.csv")
 )
-
 display(items_df)
 
 print(items_df.dtypes)
@@ -340,13 +367,13 @@ print(grades_df.count() * (len(grades_df.columns)-1))
 
 # COMMAND ----------
 
-# Azure Databrics
-# all_long_df.write.option('header',True).mode('overwrite').csv(uri+"output/CSVLong")
-# all_long_df.write.option('header',True).mode('overwrite').parquet(uri+"output/ParquetLong")
-# all_long_df.write.format("delta").mode('overwrite').save(uri+"output/DeltaLong")
-
 # Databricks Free - just save to a delta lake table.
-all_long_df.write.mode("overwrite").saveAsTable("bronze_examples.grades_long")
+#all_long_df.write.mode("overwrite").saveAsTable("bronze_examples.grades_long")
+
+# Azure Databrics
+all_long_df.write.option('header',True).mode('overwrite').csv(CONTAINER_URI_PATH + "TransformExampleData/Out/Grades_long_csv")
+all_long_df.write.option('header',True).mode('overwrite').parquet(CONTAINER_URI_PATH + "TransformExampleData/Out/Grades_long_parquet")
+all_long_df.write.format("delta").mode('overwrite').save(CONTAINER_URI_PATH + "TransformExampleData/Out/Grades_long_delta")
 
 
 # COMMAND ----------
